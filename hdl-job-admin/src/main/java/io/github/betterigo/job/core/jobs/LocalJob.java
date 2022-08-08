@@ -1,5 +1,6 @@
 package io.github.betterigo.job.core.jobs;
 
+import com.alibaba.fastjson2.JSONObject;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.betterigo.job.core.ServiceHolder;
@@ -10,9 +11,10 @@ import org.quartz.*;
 import org.quartz.impl.matchers.GroupMatcher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.util.StringUtils;
 
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 public class LocalJob implements Job {
@@ -39,16 +41,15 @@ public class LocalJob implements Job {
 //					.or().eq(Task::getUpdateTime, null);
 //				})
 				.list();
-		RibbonLoadBalancerClient ribbonLoadBalancerClient = LoadBalancerHolder.getLoadBalancerClient();
-		Scheduler scheduler = LoadBalancerHolder.getScheduler();
+		Scheduler scheduler = ServiceHolder.getScheduler();
 		try {
-			reloadTask(list, ribbonLoadBalancerClient, scheduler);
+			reloadTask(list, scheduler);
 		} catch (SchedulerException e) {
 			logger.error("",e);
 		}
 		
 	}
-	private void reloadTask(List<Task> list,RibbonLoadBalancerClient ribbonLoadBalancerClient,Scheduler scheduler) throws SchedulerException {
+	private void reloadTask(List<Task> list, Scheduler scheduler) throws SchedulerException {
 		if(mapper == null) {
 			mapper = new ObjectMapper();
 		}
@@ -67,9 +68,8 @@ public class LocalJob implements Job {
 			dataMap.putAsString("times", task.getTotalTimes() == null ? 0 : task.getTotalTimes());
 			dataMap.putAsString("period", task.getPeriod() == null ? 0 : task.getPeriod());
 			try {
-				JSONObject json = JSONObject.parseObject(new String(task.getMetaData()));
-				Map<String, Object> metaData = json.getInnerMap();
-				dataMap.put("metaData", metaData.toString());
+				JSONObject json = JSONObject.parseObject(new String(task.getMetaData().getBytes(1, (int) task.getMetaData().length()), StandardCharsets.UTF_8));
+				dataMap.put("metaData", json.toJSONString());
 //				dataMap.putAll(metaData);
 			} catch (Exception e) {
 				logger.error("",e);
