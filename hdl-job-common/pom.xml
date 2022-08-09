@@ -8,47 +8,29 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <groupId>io.github.betterigo</groupId>
-    <artifactId>hdl-job-admin</artifactId>
+    <artifactId>hdl-job-common</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>hdl-job-core</name>
-    <description>hdl-job-admin</description>
+    <name>hdl-job-common</name>
+    <description>hdl-job-common</description>
     <properties>
         <java.version>1.8</java.version>
     </properties>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+            <artifactId>spring-boot-starter</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-configuration-processor</artifactId>
-            <optional>true</optional>
+            <artifactId>spring-boot-starter-quartz</artifactId>
         </dependency>
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/com.baomidou/mybatis-plus-boot-starter -->
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>3.5.2</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-            <version>2.0.11</version>
-        </dependency>
-<!--        自定义组件-->
         <dependency>
             <groupId>io.github.betterigo</groupId>
-            <artifactId>hdl-job-common</artifactId>
+            <artifactId>hdl-job-client-common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
+
     <build>
         <plugins>
             <plugin>

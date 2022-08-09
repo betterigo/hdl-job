@@ -8,10 +8,10 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <groupId>io.github.betterigo</groupId>
-    <artifactId>hdl-job-admin</artifactId>
+    <artifactId>hdl-job-demo</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>hdl-job-core</name>
-    <description>hdl-job-admin</description>
+    <name>hdl-job-demo</name>
+    <description>hdl-job-demo</description>
     <properties>
         <java.version>1.8</java.version>
     </properties>
@@ -21,34 +21,23 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-configuration-processor</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/com.baomidou/mybatis-plus-boot-starter -->
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>3.5.2</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-            <version>2.0.11</version>
-        </dependency>
-<!--        自定义组件-->
-        <dependency>
             <groupId>io.github.betterigo</groupId>
-            <artifactId>hdl-job-common</artifactId>
+            <artifactId>hdl-job-admin</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>io.github.betterigo</groupId>
+            <artifactId>hdl-job-feign</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+<!--        引入nacos-->
+        <!-- https://mvnrepository.com/artifact/com.alibaba.cloud/spring-cloud-starter-alibaba-nacos-discovery -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
     </dependencies>
+
     <build>
         <plugins>
             <plugin>
