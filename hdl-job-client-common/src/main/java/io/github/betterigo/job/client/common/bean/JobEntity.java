@@ -15,11 +15,11 @@ import java.util.Map;
  * @description 用于启动服务后，初始化该服务的计划任务
  * @since 2020/10/29
  */
-public class TaskEntity {
+public class JobEntity {
     /**
      * 计划任务执行器类
      */
-    private String taskClassName;
+    private String jobClassName;
     /**
      * 元数据
      */
@@ -31,7 +31,7 @@ public class TaskEntity {
     /**
      * 计划任务名称
      */
-    private String taskName;
+    private String jobName;
     
     /**
      * 服务名称
@@ -56,12 +56,12 @@ public class TaskEntity {
 		this.serviceName = serviceName;
 	}
 
-	public String getTaskClassName() {
-        return taskClassName;
+	public String getJobClassName() {
+        return jobClassName;
     }
 
-    public void setTaskClassName(String taskClassName) {
-        this.taskClassName = taskClassName;
+    public void setJobClassName(String jobClassName) {
+        this.jobClassName = jobClassName;
     }
 
     public Map<String, String> getMetaData() {
@@ -80,12 +80,12 @@ public class TaskEntity {
         this.cron = cron;
     }
 
-    public String getTaskName() {
-        return taskName;
+    public String getJobName() {
+        return jobName;
     }
 
-    public void setTaskName(String taskName) {
-        this.taskName = taskName;
+    public void setJobName(String jobName) {
+        this.jobName = jobName;
     }
 
 	public int getPeriod() {

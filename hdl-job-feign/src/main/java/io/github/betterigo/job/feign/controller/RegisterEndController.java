@@ -2,8 +2,7 @@ package io.github.betterigo.job.feign.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import io.github.betterigo.job.client.common.bean.TaskEntity;
-import io.github.betterigo.job.common.pojo.JobEntity;
+import io.github.betterigo.job.client.common.bean.JobEntity;
 import io.github.betterigo.job.common.service.JobService;
 import io.github.betterigo.job.feign.jobs.RemoteFeignJob;
 import org.quartz.*;
@@ -20,6 +19,7 @@ import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
 @RestController
+@RequestMapping("/feign")
 public class RegisterEndController {
 
 	private static Logger logger = LoggerFactory.getLogger(RegisterEndController.class);
@@ -46,7 +46,7 @@ public class RegisterEndController {
 	 * @param serviceName
 	 * @throws SchedulerException 
 	 */
-	@GetMapping("/task/reg")
+	@GetMapping("/job/reg")
 	public String register(@RequestParam String cron, @RequestParam String taskName, @RequestParam String serviceName) throws SchedulerException {
 		JobDataMap dataMap = new JobDataMap();
 		dataMap.put("clientName", serviceName);
@@ -86,42 +86,42 @@ public class RegisterEndController {
 	 *
 	 * @throws SchedulerException
 	 */
-	@PostMapping("/task/reg-ps")
-	public String register(@RequestBody TaskEntity taskEntity) throws SchedulerException {
+	@PostMapping("/job/reg-ps")
+	public String register(@RequestBody JobEntity jobEntity) throws SchedulerException {
 		JobDataMap dataMap = new JobDataMap();
-		dataMap.put("clientName", taskEntity.getServiceName());
-		dataMap.put("cron", taskEntity.getCron());
-		dataMap.putAsString("times", taskEntity.getTimes());
-		dataMap.putAsString("period", taskEntity.getPeriod());
+		dataMap.put("clientName", jobEntity.getServiceName());
+		dataMap.put("cron", jobEntity.getCron());
+		dataMap.putAsString("times", jobEntity.getTimes());
+		dataMap.putAsString("period", jobEntity.getPeriod());
 //		dataMap.put("lb", ribbonLoadBalancerClient);
-		dataMap.put("taskClass", taskEntity.getTaskClassName());
-		dataMap.put("metaData", JSON.toJSONString(taskEntity.getMetaData()));
-		String jobId = taskEntity.getTaskName();
+		dataMap.put("taskClass", jobEntity.getJobClassName());
+		dataMap.put("metaData", JSON.toJSONString(jobEntity.getMetaData()));
+		String jobId = jobEntity.getJobName();
 		dataMap.put("taskName", jobId);
-		JobDetail jobDetail = JobBuilder.newJob(RemoteFeignJob.class).usingJobData(dataMap).withIdentity(jobId,taskEntity.getServiceName()).build();
+		JobDetail jobDetail = JobBuilder.newJob(RemoteFeignJob.class).usingJobData(dataMap).withIdentity(jobId, jobEntity.getServiceName()).build();
 		TriggerBuilder<Trigger> triggerBuilder = TriggerBuilder.newTrigger()
-	                .withDescription(taskEntity.getServiceName() + " trigger")
-	                .withIdentity(jobId,taskEntity.getServiceName());
-		if(!StringUtils.isEmpty(taskEntity.getCron())) {			
-			triggerBuilder.withSchedule(CronScheduleBuilder.cronSchedule(taskEntity.getCron()));
+	                .withDescription(jobEntity.getServiceName() + " trigger")
+	                .withIdentity(jobId, jobEntity.getServiceName());
+		if(!StringUtils.isEmpty(jobEntity.getCron())) {
+			triggerBuilder.withSchedule(CronScheduleBuilder.cronSchedule(jobEntity.getCron()));
 		}else {
-			if(taskEntity.getTimes()>0) {
-				triggerBuilder.withSchedule(SimpleScheduleBuilder.repeatSecondlyForTotalCount(taskEntity.getTimes(), taskEntity.getPeriod()));
+			if(jobEntity.getTimes()>0) {
+				triggerBuilder.withSchedule(SimpleScheduleBuilder.repeatSecondlyForTotalCount(jobEntity.getTimes(), jobEntity.getPeriod()));
 			}else {
-				triggerBuilder.withSchedule(SimpleScheduleBuilder.repeatSecondlyForever(taskEntity.getPeriod()));
+				triggerBuilder.withSchedule(SimpleScheduleBuilder.repeatSecondlyForever(jobEntity.getPeriod()));
 			}
 		}
 		synchronized (this) {//可能有线程安全问题			
 			boolean exist = scheduler.checkExists(jobDetail.getKey());
 			if(!exist) {			
 				scheduler.scheduleJob(jobDetail, triggerBuilder.build());
-				logger.info("添加定时任务 job:{},trigger-cron:{}",jobId,taskEntity.getCron());
+				logger.info("添加定时任务 job:{},trigger-cron:{}",jobId, jobEntity.getCron());
 			}
 		}
 		return jobId;
 	}
 	
-	@GetMapping("/task/unreg")
+	@GetMapping("/job/unreg")
 	public boolean unRegister(@RequestParam String taskName,@RequestParam String serviceName) {
 		TriggerKey triggerKey = TriggerKey.triggerKey(taskName, serviceName);
 		try {
@@ -143,13 +143,13 @@ public class RegisterEndController {
 	 * @return
 	 * @throws SchedulerException 
 	 */
-	@GetMapping("/task/pause")
+	@GetMapping("/job/pause")
 	public boolean pauseTask(@RequestParam String taskName,@RequestParam String serviceName) throws SchedulerException {
 		scheduler.pauseJob(new JobKey(taskName, serviceName));
 		return true;
 	}
 	
-	@GetMapping("/task/resume")
+	@GetMapping("/job/resume")
 	public boolean resumeTask(@RequestParam String taskName,@RequestParam String serviceName) throws SchedulerException {
 		scheduler.resumeJob(new JobKey(taskName, serviceName));
 		return true;
@@ -160,23 +160,23 @@ public class RegisterEndController {
 	 * @param serviceName 服务名称（分组名称）
 	 * @return
 	 */
-	@GetMapping("/task/entity")
-	public List<TaskEntity> getTaskEntityList(@RequestParam String serviceName){
-		List<JobEntity> list = jobService.listJobsByGroup(serviceName);
-		List<TaskEntity> result = list.stream().map(task -> {
+	@GetMapping("/job/entity")
+	public List<JobEntity> getTaskEntityList(@RequestParam String serviceName){
+		List<io.github.betterigo.job.common.pojo.JobEntity> list = jobService.listJobsByGroup(serviceName);
+		List<JobEntity> result = list.stream().map(task -> {
 			try {
 				JSONObject json = JSONObject.parseObject(new String(task.getMetaData().getBytes(1, (int) task.getMetaData().length()), StandardCharsets.UTF_8));
-				TaskEntity taskEntity = new TaskEntity();
-				taskEntity.setCron(task.getCron());
+				JobEntity jobEntity = new JobEntity();
+				jobEntity.setCron(task.getCron());
 				Map<String, String> mtd = new HashMap<>();
 				for(Entry<String, Object> entry : json.getInnerMap().entrySet()) {
 					mtd.put(entry.getKey(), entry.getValue().toString());
 				}
-				taskEntity.setMetaData(mtd);
-				taskEntity.setTaskClassName(task.getExecutorClass());
-				taskEntity.setServiceName(task.getGroupName());
-				taskEntity.setTaskName(task.getName());
-				return taskEntity;
+				jobEntity.setMetaData(mtd);
+				jobEntity.setJobClassName(task.getExecutorClass());
+				jobEntity.setServiceName(task.getGroupName());
+				jobEntity.setJobName(task.getName());
+				return jobEntity;
 			}catch (Exception e) {
 				logger.error("",e);
 			}

@@ -1,8 +1,7 @@
 package io.github.betterigo.job.admin;
 
-import io.github.betterigo.job.admin.config.SchedulerConfig;
 import io.github.betterigo.job.admin.config.MybatisConfig;
-import io.github.betterigo.job.admin.core.ScheduledBootstrap;
+import io.github.betterigo.job.admin.config.SchedulerConfig;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScans;
 import org.springframework.context.annotation.Configuration;

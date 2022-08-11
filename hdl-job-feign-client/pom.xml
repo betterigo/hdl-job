@@ -8,10 +8,10 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <groupId>io.github.betterigo</groupId>
-    <artifactId>hdl-job-client-common</artifactId>
+    <artifactId>hdl-job-feign-client</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>hdl-job-client-common</name>
-    <description>hdl-job-client-common</description>
+    <name>hdl-job-feign-client</name>
+    <description>hdl-job-feign-client</description>
     <properties>
         <java.version>1.8</java.version>
     </properties>
@@ -20,13 +20,13 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
         <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>31.1-jre</version>
+            <groupId>io.github.betterigo</groupId>
+            <artifactId>hdl-job-client-common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
+
     <build>
         <plugins>
             <plugin>

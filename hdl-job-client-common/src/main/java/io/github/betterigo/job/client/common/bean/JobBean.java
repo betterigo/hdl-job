@@ -11,7 +11,7 @@ import java.util.Date;
  * @author haodonglei
  * @since 2020年7月28日
  */
-public class TaskBean implements Serializable{
+public class JobBean implements Serializable{
 	private static final long serialVersionUID = -6566877181990800742L;
 	private Date lastExecTime;
 	private Date nextExecTime;

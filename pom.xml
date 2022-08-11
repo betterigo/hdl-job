@@ -13,6 +13,7 @@
         <module>hdl-job-common</module>
         <module>hdl-job-feign</module>
         <module>hdl-job-client-common</module>
+        <module>hdl-job-feign-client</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
