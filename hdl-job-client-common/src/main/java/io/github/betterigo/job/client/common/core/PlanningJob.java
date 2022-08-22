@@ -53,12 +53,14 @@ public class PlanningJob implements IJob {
 	public String getCron() {
 		return cron;
 	}
+
+	@Override
+	public Consumer<Map<String, String>> getJob() {
+		return null;
+	}
+
 	public Runnable getTaskRunnabel() {
 		return task;
-	}
-	@Override
-	public Consumer<Map<String, String>> getTask() {
-		return null;
 	}
 	public Supplier<?> getSupplier() {
 		return supplier;

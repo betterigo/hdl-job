@@ -27,7 +27,7 @@ public interface FeignJobService {
      * @return
      */
     @GetMapping("/feign/job/reg")
-    public String register(@RequestParam("cron") String cron,@RequestParam("taskName") String taskName,@RequestParam("serviceName") String serviceName);
+    String register(@RequestParam("cron") String cron,@RequestParam("taskName") String taskName,@RequestParam("serviceName") String serviceName);
 
     @PostMapping("/feign/job/reg-ps")
     String register(@RequestBody JobEntity jobEntity);

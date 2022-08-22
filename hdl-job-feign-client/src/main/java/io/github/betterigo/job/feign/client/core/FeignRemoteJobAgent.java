@@ -20,9 +20,9 @@ import java.util.concurrent.ThreadPoolExecutor;
 
 
 @Service
-public class FeignRemoteTaskAgent implements RemoteTaskAgent {
+public class FeignRemoteJobAgent implements RemoteJobAgent {
 
-	private static final Logger logger = LoggerFactory.getLogger(FeignRemoteTaskAgent.class);
+	private static final Logger logger = LoggerFactory.getLogger(FeignRemoteJobAgent.class);
 	
 	@Autowired
 	private JobRegister jobRegister;

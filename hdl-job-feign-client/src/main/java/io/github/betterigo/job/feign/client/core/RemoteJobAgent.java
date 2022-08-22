@@ -6,7 +6,7 @@ package io.github.betterigo.job.feign.client.core;
  * @author haodonglei
  * @since 2020年7月24日
  */
-public interface RemoteTaskAgent {
+public interface RemoteJobAgent {
 	
-	public void execTask(String taskName);
+	void execTask(String taskName);
 }

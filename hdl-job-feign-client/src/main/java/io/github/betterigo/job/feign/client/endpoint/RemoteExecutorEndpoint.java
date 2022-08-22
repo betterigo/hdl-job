@@ -1,6 +1,6 @@
 package io.github.betterigo.job.feign.client.endpoint;
 
-import io.github.betterigo.job.feign.client.core.RemoteTaskAgent;
+import io.github.betterigo.job.feign.client.core.RemoteJobAgent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,7 +18,7 @@ public class RemoteExecutorEndpoint {
 	private static final String BASE_URL="/hdl/job";
 
 	@Autowired
-	private RemoteTaskAgent taskAgent;
+	private RemoteJobAgent taskAgent;
 	
 	@GetMapping(BASE_URL + "/remote-exec")
 	public void execTask(@RequestParam String name) {
