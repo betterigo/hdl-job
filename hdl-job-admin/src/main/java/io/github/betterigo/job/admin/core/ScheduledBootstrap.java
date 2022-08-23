@@ -68,7 +68,7 @@ public class ScheduledBootstrap implements CommandLineRunner {
 				.withDescription("mysql-sync-trigger")
 				.withIdentity(jobId, group)
 //				.withSchedule(CronScheduleBuilder.cronSchedule("0/10 * * * * ?"));
-				.withSchedule(SimpleScheduleBuilder.repeatSecondlyForTotalCount(1, 10));
+				.withSchedule(SimpleScheduleBuilder.repeatSecondlyForTotalCount(1));
 		JobDataMap dataMap = new JobDataMap();
 		dataMap.put("jobId", jobId);
 		dataMap.put("group", group);

@@ -2,7 +2,7 @@ package io.github.betterigo.job.client.common.core.persistant;
 
 import io.github.betterigo.job.client.common.core.IJob;
 import io.github.betterigo.job.client.common.core.JobRegister;
-import io.github.betterigo.job.common.pojo.JobCEntity;
+import io.github.betterigo.job.lib.bean.JobCEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

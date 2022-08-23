@@ -9,11 +9,18 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
+        <!--admin模块，包含任务运行时和提个web管理端-->
         <module>hdl-job-admin</module>
+        <!--任务服务端实现方式通用模块-->
         <module>hdl-job-common</module>
+        <!--任务服务端Feign实现方式模块-->
         <module>hdl-job-feign</module>
+        <!--任务客户端实现方式通用模块-->
         <module>hdl-job-client-common</module>
+        <!--任务Feign客户端实现方式模块-->
         <module>hdl-job-feign-client</module>
+        <!--通用库-->
+        <module>hdl-job-lib</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

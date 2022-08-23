@@ -6,8 +6,8 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import io.github.betterigo.job.admin.core.TaskStatus;
 import io.github.betterigo.job.admin.entity.Task;
 import io.github.betterigo.job.admin.service.ITaskService;
-import io.github.betterigo.job.common.pojo.JobCEntity;
 import io.github.betterigo.job.common.service.JobService;
+import io.github.betterigo.job.lib.bean.JobCEntity;
 import org.quartz.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -141,7 +141,7 @@ public class JobServiceImpl implements JobService {
         List<Task> tasks = taskService.list(taskQueryWrapper);
         List<JobCEntity> result = tasks.stream().map(task -> {
             try {
-                JSONObject json = JSONObject.parseObject(new String(task.getMetaData().getBytes(1, (int) task.getMetaData().length()), StandardCharsets.UTF_8));
+                JSONObject json = JSONObject.parseObject(new String(task.getMetaData(), StandardCharsets.UTF_8));
                 JobCEntity jobCEntity = new JobCEntity();
                 jobCEntity.setCron(task.getCron());
                 Map<String, String> mtd = new HashMap<>();

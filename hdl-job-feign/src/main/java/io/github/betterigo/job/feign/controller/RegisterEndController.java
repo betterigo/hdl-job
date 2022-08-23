@@ -1,8 +1,8 @@
 package io.github.betterigo.job.feign.controller;
 
-import io.github.betterigo.job.common.pojo.JobCEntity;
 import io.github.betterigo.job.common.service.JobService;
 import io.github.betterigo.job.feign.jobs.RemoteFeignJob;
+import io.github.betterigo.job.lib.bean.JobCEntity;
 import org.quartz.SchedulerException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

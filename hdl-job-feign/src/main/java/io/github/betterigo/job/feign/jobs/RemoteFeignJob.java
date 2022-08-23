@@ -19,7 +19,7 @@ public class RemoteFeignJob implements Job {
 	
 	private OkHttpClient httpClient;
 	
-	private static final String EXEC_URL = "/api/task/remote-exec";
+	private static final String EXEC_URL = "/hdl/job/remote-exec";
 	
 	@Override
 	public void execute(JobExecutionContext context) throws JobExecutionException {
@@ -43,12 +43,12 @@ public class RemoteFeignJob implements Job {
 			
 			@Override
 			public void onResponse(Call call, Response response) throws IOException {
-				logger.info("tast-{} exec successfully callback",taskName);
+				logger.info("task-{} exec successfully callback",taskName);
 			}
 			
 			@Override
 			public void onFailure(Call call, IOException e) {
-				logger.error("tast-{} exec failed callback",taskName,e);
+				logger.error("task-{} exec failed callback",taskName,e);
 			}
 		});
 	}

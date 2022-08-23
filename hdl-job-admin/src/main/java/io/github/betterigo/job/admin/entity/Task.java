@@ -64,7 +64,7 @@ public class Task implements Serializable {
     /**
      * 元数据
      */
-    private Blob metaData;
+    private byte[] metaData;
 
     /**
      * 执行器class
@@ -142,13 +142,15 @@ public class Task implements Serializable {
     public void setStatus(String status) {
         this.status = status;
     }
-    public Blob getMetaData() {
+
+    public byte[] getMetaData() {
         return metaData;
     }
 
-    public void setMetaData(Blob metaData) {
+    public void setMetaData(byte[] metaData) {
         this.metaData = metaData;
     }
+
     public String getExecutorClass() {
         return executorClass;
     }

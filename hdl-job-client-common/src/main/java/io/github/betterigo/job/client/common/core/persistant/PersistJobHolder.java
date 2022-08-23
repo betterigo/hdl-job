@@ -88,14 +88,19 @@ public class PersistJobHolder implements CommandLineRunner {
         log.info("初始化计划任务的实例对象");
         log.info("加载远程任务...");
         //设置时区为Asia/Shanghai
-        reloadRemoteJob();
-        if(tasks!=null) {        	
+        try {
+            reloadRemoteJob();
+        }catch (Exception e){
+            log.error("加载任务异常:{}",e.getMessage());
+        }
+        //TODO 需要判断加载过来的是否包含了tasks里面的任务，如果有的话就不再次注册了
+        if(tasks!=null) {
         	log.info("获取{}个任务实例",tasks.size());
         	tasks.stream().forEach(plan->{
         		try {					
         			taskRegister.regPersistJob(plan);
 				} catch (Throwable e) {
-					log.error("",e);
+					log.error("加载任务异常:{}",e.getMessage());
 				}
         	});
         }else {

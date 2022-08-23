@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "hdl.job.server-name",
+      "type": "java.lang.String",
+      "description": "任务服务端名称."
+  }
+] }

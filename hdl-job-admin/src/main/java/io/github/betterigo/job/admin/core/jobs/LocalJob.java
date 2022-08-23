@@ -74,7 +74,7 @@ public class LocalJob implements Job {
 			dataMap.putAsString("times", task.getTotalTimes() == null ? 0 : task.getTotalTimes());
 			dataMap.putAsString("period", task.getPeriod() == null ? 0 : task.getPeriod());
 			try {
-				JSONObject json = JSONObject.parseObject(new String(task.getMetaData().getBytes(1, (int) task.getMetaData().length()), StandardCharsets.UTF_8));
+				JSONObject json = JSONObject.parseObject(new String(task.getMetaData(), StandardCharsets.UTF_8));
 				dataMap.put("metaData", json.toJSONString());
 //				dataMap.putAll(metaData);
 			} catch (Exception e) {

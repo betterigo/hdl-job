@@ -2,7 +2,7 @@ package io.github.betterigo.job.client.common.core;
 
 import io.github.betterigo.job.client.common.bean.JobBean;
 import io.github.betterigo.job.client.common.core.persistant.PersistJob;
-import io.github.betterigo.job.common.pojo.JobCEntity;
+import io.github.betterigo.job.lib.bean.JobCEntity;
 
 import java.util.List;
 import java.util.Map;
