@@ -64,17 +64,19 @@ public class ScheduledBootstrap implements CommandLineRunner {
 		log.info("mysql data sync task start");
 		String jobId = "mysql-task-sync";
 		String group = "local-service";
-		TriggerBuilder<CronTrigger> triggerBuilder = TriggerBuilder.newTrigger()
+		TriggerBuilder<SimpleTrigger> triggerBuilder = TriggerBuilder.newTrigger()
 				.withDescription("mysql-sync-trigger")
-				.withIdentity(jobId,group)
-				.withSchedule(CronScheduleBuilder.cronSchedule("0/10 * * * * ?"));
+				.withIdentity(jobId, group)
+//				.withSchedule(CronScheduleBuilder.cronSchedule("0/10 * * * * ?"));
+				.withSchedule(SimpleScheduleBuilder.repeatSecondlyForTotalCount(1, 10));
 		JobDataMap dataMap = new JobDataMap();
 		dataMap.put("jobId", jobId);
 		dataMap.put("group", group);
 		JobDetail jobDetail = JobBuilder.newJob(LocalJob.class).usingJobData(dataMap).withIdentity(jobId,group).build();
 		boolean exists = scheduler.checkExists(jobDetail.getKey());
-		if(!exists){
-			scheduler.scheduleJob(jobDetail, triggerBuilder.build());
+		if(exists){
+			scheduler.deleteJob(jobDetail.getKey());
 		}
+		scheduler.scheduleJob(jobDetail, triggerBuilder.build());
 	}
 }

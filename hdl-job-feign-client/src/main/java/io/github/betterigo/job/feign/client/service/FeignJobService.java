@@ -1,7 +1,7 @@
 package io.github.betterigo.job.feign.client.service;
 
 import io.github.betterigo.job.client.common.bean.JobBean;
-import io.github.betterigo.job.client.common.bean.JobEntity;
+import io.github.betterigo.job.client.common.bean.JobCEntity;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,7 +30,7 @@ public interface FeignJobService {
     String register(@RequestParam("cron") String cron,@RequestParam("taskName") String taskName,@RequestParam("serviceName") String serviceName);
 
     @PostMapping("/feign/job/reg-ps")
-    String register(@RequestBody JobEntity jobEntity);
+    String register(@RequestBody JobCEntity jobCEntity);
     /**
      * <p>Title: unRegister</p>
      * <p>Description: 移除一个任务</p>
@@ -51,7 +51,7 @@ public interface FeignJobService {
     List<JobBean> ListJobByGroup(@RequestParam("serviceName") String serviceName);
 
     @GetMapping("/feign/job/entity")
-    List<JobEntity> getJobEntityList(@RequestParam("serviceName") String serviceName);
+    List<JobCEntity> getJobEntityList(@RequestParam("serviceName") String serviceName);
     /**
      * <p>Title: pauseTask</p>
      * <p>Description: 暂停任务</p>

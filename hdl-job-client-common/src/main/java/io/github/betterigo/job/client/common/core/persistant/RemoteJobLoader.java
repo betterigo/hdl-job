@@ -1,6 +1,6 @@
 package io.github.betterigo.job.client.common.core.persistant;
 
-import io.github.betterigo.job.client.common.bean.JobEntity;
+import io.github.betterigo.job.client.common.bean.JobCEntity;
 import io.github.betterigo.job.client.common.core.IJob;
 import io.github.betterigo.job.client.common.core.JobRegister;
 import org.slf4j.Logger;
@@ -28,7 +28,7 @@ public class RemoteJobLoader implements JobLoader {
 	
 	@Override
 	public List<IJob> loadTask() {
-		List<JobEntity> taskEntities = taskRegister.ListjobEntities();
+		List<JobCEntity> taskEntities = taskRegister.ListjobEntities();
         if(!CollectionUtils.isEmpty(taskEntities)) {
         	List<IJob> iTasks = taskEntities.stream().map(t->{
         		log.info("获取到远程任务task-name:{}",t.getJobName());

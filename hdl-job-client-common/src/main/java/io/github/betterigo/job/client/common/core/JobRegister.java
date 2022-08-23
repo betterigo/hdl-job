@@ -1,7 +1,7 @@
 package io.github.betterigo.job.client.common.core;
 
 import io.github.betterigo.job.client.common.bean.JobBean;
-import io.github.betterigo.job.client.common.bean.JobEntity;
+import io.github.betterigo.job.client.common.bean.JobCEntity;
 import io.github.betterigo.job.client.common.core.persistant.PersistJob;
 
 import java.util.List;
@@ -71,7 +71,7 @@ public interface JobRegister {
 	 * <p>Description: 任务列表-持久化</p>   
 	 * @return
 	 */
-	public List<JobEntity> ListjobEntities();
+	public List<JobCEntity> ListjobEntities();
 	
 	/**
 	 * <p>Title: pausejob</p>

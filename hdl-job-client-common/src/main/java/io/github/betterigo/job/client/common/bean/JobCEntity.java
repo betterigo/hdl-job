@@ -15,7 +15,7 @@ import java.util.Map;
  * @description 用于启动服务后，初始化该服务的计划任务
  * @since 2020/10/29
  */
-public class JobEntity {
+public class JobCEntity {
     /**
      * 计划任务执行器类
      */

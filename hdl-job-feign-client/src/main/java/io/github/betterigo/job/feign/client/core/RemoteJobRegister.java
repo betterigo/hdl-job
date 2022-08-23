@@ -1,7 +1,7 @@
 package io.github.betterigo.job.feign.client.core;
 
 import io.github.betterigo.job.client.common.bean.JobBean;
-import io.github.betterigo.job.client.common.bean.JobEntity;
+import io.github.betterigo.job.client.common.bean.JobCEntity;
 import io.github.betterigo.job.client.common.core.IJob;
 import io.github.betterigo.job.client.common.core.JobRegister;
 import io.github.betterigo.job.client.common.core.PlanningJob;
@@ -116,20 +116,20 @@ public class RemoteJobRegister implements JobRegister {
 		if(persistJobHolder.getJob(persistPlanningjob.getJobName())!=null) {
 //			return;
 		}
-		JobEntity jobEntity = new JobEntity();
-		jobEntity.setCron(persistPlanningjob.getCron());
-		jobEntity.setMetaData(persistPlanningjob.getMetaData());
-		jobEntity.setServiceName(serviceName);
-		jobEntity.setJobClassName(persistPlanningjob.getJobClass().getName());
-		jobEntity.setJobName(persistPlanningjob.getJobName());
-		jobEntity.setPeriod(persistPlanningjob.getPeriod());
-		jobEntity.setTimes(persistPlanningjob.getTimes());
-		persistJobHolder.addJob(jobEntity.getJobName(), persistPlanningjob);
-		jobService.register(jobEntity);
+		JobCEntity jobCEntity = new JobCEntity();
+		jobCEntity.setCron(persistPlanningjob.getCron());
+		jobCEntity.setMetaData(persistPlanningjob.getMetaData());
+		jobCEntity.setServiceName(serviceName);
+		jobCEntity.setJobClassName(persistPlanningjob.getJobClass().getName());
+		jobCEntity.setJobName(persistPlanningjob.getJobName());
+		jobCEntity.setPeriod(persistPlanningjob.getPeriod());
+		jobCEntity.setTimes(persistPlanningjob.getTimes());
+		persistJobHolder.addJob(jobCEntity.getJobName(), persistPlanningjob);
+		jobService.register(jobCEntity);
 	}
 
 	@Override
-	public List<JobEntity> ListjobEntities() {
+	public List<JobCEntity> ListjobEntities() {
 		return jobService.getJobEntityList(serviceName);
 	}
 

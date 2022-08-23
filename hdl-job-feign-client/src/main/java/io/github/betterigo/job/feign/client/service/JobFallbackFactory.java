@@ -1,7 +1,7 @@
 package io.github.betterigo.job.feign.client.service;
 
 import io.github.betterigo.job.client.common.bean.JobBean;
-import io.github.betterigo.job.client.common.bean.JobEntity;
+import io.github.betterigo.job.client.common.bean.JobCEntity;
 import org.springframework.cloud.openfeign.FallbackFactory;
 import org.springframework.stereotype.Component;
 
@@ -31,7 +31,7 @@ public class JobFallbackFactory implements FallbackFactory<FeignJobService> {
             }
 
             @Override
-            public String register(JobEntity jobEntity) {
+            public String register(JobCEntity jobCEntity) {
                 return null;
             }
 
@@ -61,7 +61,7 @@ public class JobFallbackFactory implements FallbackFactory<FeignJobService> {
             }
 
             @Override
-            public List<JobEntity> getJobEntityList(String serviceName) {
+            public List<JobCEntity> getJobEntityList(String serviceName) {
                 return null;
             }
 
