@@ -6,7 +6,7 @@
  * Date: 2020/10/29 下午4:29
  */
 
-package io.github.betterigo.job.client.common.bean;
+package io.github.betterigo.job.common.pojo;
 
 import java.util.Map;
 

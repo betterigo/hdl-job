@@ -1,13 +1,13 @@
 package io.github.betterigo.job.feign.client.core;
 
 import io.github.betterigo.job.client.common.bean.JobBean;
-import io.github.betterigo.job.client.common.bean.JobCEntity;
 import io.github.betterigo.job.client.common.core.IJob;
 import io.github.betterigo.job.client.common.core.JobRegister;
 import io.github.betterigo.job.client.common.core.PlanningJob;
 import io.github.betterigo.job.client.common.core.persistant.PersistJob;
 import io.github.betterigo.job.client.common.core.persistant.PersistJobHolder;
 import io.github.betterigo.job.client.common.core.persistant.PersistPlanningJob;
+import io.github.betterigo.job.common.pojo.JobCEntity;
 import io.github.betterigo.job.feign.client.service.FeignJobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import io.github.betterigo.job.admin.core.TaskStatus;
 import io.github.betterigo.job.admin.entity.Task;
 import io.github.betterigo.job.admin.service.ITaskService;
-import io.github.betterigo.job.client.common.bean.JobCEntity;
+import io.github.betterigo.job.common.pojo.JobCEntity;
 import io.github.betterigo.job.common.service.JobService;
 import org.quartz.*;
 import org.slf4j.Logger;

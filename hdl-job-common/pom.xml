@@ -24,13 +24,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-quartz</artifactId>
         </dependency>
-        <dependency>
-            <groupId>io.github.betterigo</groupId>
-            <artifactId>hdl-job-client-common</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
@@ -39,5 +33,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>

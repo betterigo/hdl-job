@@ -1,7 +1,7 @@
 package io.github.betterigo.job.feign.client.service;
 
 import io.github.betterigo.job.client.common.bean.JobBean;
-import io.github.betterigo.job.client.common.bean.JobCEntity;
+import io.github.betterigo.job.common.pojo.JobCEntity;
 import org.springframework.cloud.openfeign.FallbackFactory;
 import org.springframework.stereotype.Component;
 

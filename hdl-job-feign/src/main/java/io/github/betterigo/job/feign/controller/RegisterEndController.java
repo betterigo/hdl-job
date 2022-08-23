@@ -1,6 +1,6 @@
 package io.github.betterigo.job.feign.controller;
 
-import io.github.betterigo.job.client.common.bean.JobCEntity;
+import io.github.betterigo.job.common.pojo.JobCEntity;
 import io.github.betterigo.job.common.service.JobService;
 import io.github.betterigo.job.feign.jobs.RemoteFeignJob;
 import org.quartz.SchedulerException;
@@ -8,7 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController

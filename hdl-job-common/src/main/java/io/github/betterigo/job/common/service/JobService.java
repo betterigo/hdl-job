@@ -1,6 +1,6 @@
 package io.github.betterigo.job.common.service;
 
-import io.github.betterigo.job.client.common.bean.JobCEntity;
+import io.github.betterigo.job.common.pojo.JobCEntity;
 import io.github.betterigo.job.common.pojo.JobEntity;
 import org.quartz.Job;
 import org.quartz.SchedulerException;
